@@ -3,7 +3,7 @@ import { readMatches } from "./readMatches";
 const calcTotalDistance = (list1: number[], list2: number[]): number => {
     // pass in two arrays of numbers
     // return the difference between the numbers in both lists as number
-
+    const t0 = performance.now();
     let distance = 0;
 
     // sort both lists
@@ -15,13 +15,14 @@ const calcTotalDistance = (list1: number[], list2: number[]): number => {
         distance += currDistance;
     })
     
+    console.log('calcTotalDistance time: ', performance.now() - t0);
     return distance;
 }
 
 const calcSimilarityScore = (list1: number[], list2: number[]): number => {
     // input, two lists of numbers
     // output, a similarity score
-
+    const t0 = performance.now();
     let similarityScore = 0;
 
     // create a counter Map for list2 that counts number of occurrences each number appears
@@ -41,6 +42,7 @@ const calcSimilarityScore = (list1: number[], list2: number[]): number => {
         }
     })
 
+    console.log('calcSimilarityScore time', performance.now() - t0);
     return similarityScore;
 }
 
