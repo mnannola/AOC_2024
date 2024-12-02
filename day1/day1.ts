@@ -1,19 +1,17 @@
 import { readMatches } from "./readMatches";
 
 const calcTotalDistance = (list1: number[], list2: number[]): number => {
-    // pass in two arrays of numbers
+    // pass in two same length arrays of numbers 
     // return the difference between the numbers in both lists as number
     const t0 = performance.now();
-    let distance = 0;
 
     // sort both lists
     list1.sort((a,b) => a - b);    
-    list2.sort((a,b) => a - b);    
+    list2.sort((a,b) => a - b);        
 
-    list1.forEach((num,i) => {
-        const currDistance = Math.abs(num - list2[i])
-        distance += currDistance;
-    })
+    const distance = list1.reduce((acc, cur, i) => {
+        return acc += Math.abs(cur - list2[i])
+    }, 0)
     
     console.log('calcTotalDistance time: ', performance.now() - t0);
     return distance;
@@ -23,7 +21,7 @@ const calcSimilarityScore = (list1: number[], list2: number[]): number => {
     // input, two lists of numbers
     // output, a similarity score
     const t0 = performance.now();
-    let similarityScore = 0;
+    // let similarityScore = 0;
 
     // create a counter Map for list2 that counts number of occurrences each number appears
     const list2Count = new Map<number,number>();
@@ -34,13 +32,13 @@ const calcSimilarityScore = (list1: number[], list2: number[]): number => {
         } else {
             list2Count.set(num, 1);
         }
-    })
-    
-    list1.forEach(num => {
-        if (list2Count.has(num)) {
-            similarityScore += (num * list2Count.get(num)!)
-        }
-    })
+    });
+        
+    const similarityScore = list1.reduce((acc, cur) => {
+        if (list2Count.has(cur))
+            acc += (cur * list2Count.get(cur)!)
+        return acc
+    });
 
     console.log('calcSimilarityScore time', performance.now() - t0);
     return similarityScore;
