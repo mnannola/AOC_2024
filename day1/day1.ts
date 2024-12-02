@@ -44,7 +44,7 @@ const calcSimilarityScore = (list1: number[], list2: number[]): number => {
     return similarityScore;
 }
 
-const matches = await readMatches("testinput.txt");
+const [arr1,arr2] = await readMatches("testinput.txt");
 
-console.log('Total Distance: ', calcTotalDistance(matches[0], matches[1]));
-console.log('Similarity Score: ', calcSimilarityScore(matches[0], matches[1]));
+console.log('Total Distance: ', calcTotalDistance(arr1, arr2));
+console.log('Similarity Score: ', calcSimilarityScore(arr1, arr2));
