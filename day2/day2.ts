@@ -1,6 +1,6 @@
 import { readLines } from "../utils/readLines";
 
-const howManySafeReports = (reports:number[][]): number => {
+const howManySafeReports = (reports:number[][], hasDampner: boolean): number => {
     // calc how many safe reports
     // input: 2d array of levels in this shape:
     // const reports: number[][] = [
@@ -21,7 +21,19 @@ const howManySafeReports = (reports:number[][]): number => {
     // loop through each row (report) of reports
     let safeCount = 0;
     for (const report of reports) {        
-        const isSafe = isReportSafe(report);        
+        let isSafe = isReportSafe(report);
+        if (hasDampner && !isSafe) {
+            // try looping through each number in report and running isReportSafe without that number
+            // If it would be safe without a single number, then set isSafe to true.
+            for (const [i, _number] of report.entries()) {                
+                const reportWithMissingNum = report.filter((_,j) => i !== j);                
+                let tmpIsSafe = isReportSafe(reportWithMissingNum);
+                if (tmpIsSafe) {                    
+                    isSafe = true;
+                    break;
+                }
+            }
+        }   
         if (isSafe){            
             safeCount++;
         }
@@ -57,7 +69,7 @@ const fileName = "input.txt";
 
 await readLines(fileName, onReadLine)
 
-console.log(howManySafeReports(reports))
+console.log(howManySafeReports(reports, true))
 // console.log(isReportSafe([4,4,4,4,5]))
 function isReportSafe(report: number[]) {
      // test to see if the report is safe
