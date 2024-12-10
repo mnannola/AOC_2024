@@ -15,13 +15,5 @@ export const readLines = async (inputFile:string, readLine: (line: string) => vo
             // onLineRead(lines.shift()!);
             readLine(lines.shift()!)
         }
-    }
-
-    return
-
-    // function onLineRead(line:string) {    
-    //     const numberArr = line.split('   '); 
-    //     arr1.push(parseInt(numberArr[0], 10))
-    //     arr2.push(parseInt(numberArr[1], 10));
-    // }
+    }        
 }

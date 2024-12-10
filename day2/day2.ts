@@ -1,7 +1,4 @@
-
-
-
-
+import { readLines } from "../utils/readLines";
 
 const howManySafeReports = (reports:number[][]): number => {
     // calc how many safe reports
@@ -35,14 +32,21 @@ const howManySafeReports = (reports:number[][]): number => {
     // return safe report counter
 }
 
-const reports: number[][] = [
-    [7, 6, 4, 2, 1],
-    [1, 2, 7, 8, 9],
-    [9, 7, 6, 2, 1],
-    [1, 3, 2, 4, 5],
-    [8, 6, 4, 4, 1],
-    [1, 3, 6, 7, 9]
-];
+// const reports: number[][] = [
+//     [7, 6, 4, 2, 1],
+//     [1, 2, 7, 8, 9],
+//     [9, 7, 6, 2, 1],
+//     [1, 3, 2, 4, 5],
+//     [8, 6, 4, 4, 1],
+//     [1, 3, 6, 7, 9]
+// ];
+
+const reports: number[][] = [[]];
+function onReadLine(line: string) {
+    console.log(line)
+}
+/* readLines("input.txt", onReadLine) */
+await readLines("testinput.txt", onReadLine)
 
 //console.log(isReportSafe([7,6,4,2,1]))
 //console.log(isReportSafe([1, 3, 2, 4, 5]))
@@ -80,12 +84,4 @@ function isReportSafe(report: number[]) {
         prev = curr;
      }
      return true;
-            // loop through each num in report
-            // if no prev number, set prev to current number and continue
-
-            // if prev number, check the following
-                // if row so far is increasing or decreasing and if this matches
-                    // if not set, compare to prev and set
-                // if Math.abs(prev - curr) is > 0 and < 4
-                // If no to either of the above, row is not safe, return false
 }

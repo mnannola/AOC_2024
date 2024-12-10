@@ -1,4 +1,4 @@
-import { readLines } from "./readMatches";
+import { readLines } from "../utils/readLines";
 
 const calcTotalDistance = (list1: number[], list2: number[]): number => {
     // pass in two same length arrays of numbers 
