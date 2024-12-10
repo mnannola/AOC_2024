@@ -12,7 +12,6 @@ export const readLines = async (inputFile:string, readLine: (line: string) => vo
         remainingData += str;
         let lines = remainingData.split(/\r?\n/)
         while (lines.length > 1) {
-            // onLineRead(lines.shift()!);
             readLine(lines.shift()!)
         }
     }        

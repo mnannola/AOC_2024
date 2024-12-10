@@ -20,10 +20,11 @@ const howManySafeReports = (reports:number[][]): number => {
 
     // loop through each row (report) of reports
     let safeCount = 0;
-    for (const report of reports) {
-        const isSafe = isReportSafe(report);
-        if (isSafe)
+    for (const report of reports) {        
+        const isSafe = isReportSafe(report);        
+        if (isSafe){            
             safeCount++;
+        }
     }
     return safeCount;
        
@@ -41,18 +42,23 @@ const howManySafeReports = (reports:number[][]): number => {
 //     [1, 3, 6, 7, 9]
 // ];
 
-const reports: number[][] = [[]];
-function onReadLine(line: string) {
-    console.log(line)
+const reports: number[][] = [];
+function onReadLine(line: string) {    
+    const lineNumbers: number[] = [];
+    // split line on space
+    const splitLine = line.split(' ');
+    // append each number in line to reports
+    splitLine.forEach(number => lineNumbers.push(parseInt(number, 10)))
+    // add lineNumbers to reports
+    reports.push(lineNumbers);
 }
-/* readLines("input.txt", onReadLine) */
-await readLines("testinput.txt", onReadLine)
+const fileName = "input.txt";
+// const fileName = "testinput.txt";
 
-//console.log(isReportSafe([7,6,4,2,1]))
-//console.log(isReportSafe([1, 3, 2, 4, 5]))
+await readLines(fileName, onReadLine)
 
 console.log(howManySafeReports(reports))
-
+// console.log(isReportSafe([4,4,4,4,5]))
 function isReportSafe(report: number[]) {
      // test to see if the report is safe
      let prev;
@@ -67,7 +73,7 @@ function isReportSafe(report: number[]) {
         if (isIncreasing === undefined)
         {
             isIncreasing = diff > 0;
-        }
+        }        
         
         const absDiff = Math.abs(diff);
         if (absDiff < 1 || absDiff > 3){
