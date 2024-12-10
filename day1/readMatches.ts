@@ -1,6 +1,4 @@
-export const readMatches = async (inputFile:string):Promise<number[][]> => {
-    const arr1:number[] = [];
-    const arr2:number[] = [];
+export const readLines = async (inputFile:string, readLine: (line: string) => void):Promise<any> => {
     // read input.txt file
     // const inputFile = "testinput.txt";
     
@@ -14,15 +12,16 @@ export const readMatches = async (inputFile:string):Promise<number[][]> => {
         remainingData += str;
         let lines = remainingData.split(/\r?\n/)
         while (lines.length > 1) {
-            onLineRead(lines.shift()!);
+            // onLineRead(lines.shift()!);
+            readLine(lines.shift()!)
         }
     }
 
-    return [arr1,arr2];
+    return
 
-    function onLineRead(line:string) {    
-        const numberArr = line.split('   '); 
-        arr1.push(parseInt(numberArr[0], 10))
-        arr2.push(parseInt(numberArr[1], 10));
-    }
+    // function onLineRead(line:string) {    
+    //     const numberArr = line.split('   '); 
+    //     arr1.push(parseInt(numberArr[0], 10))
+    //     arr2.push(parseInt(numberArr[1], 10));
+    // }
 }

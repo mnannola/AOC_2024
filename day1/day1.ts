@@ -1,4 +1,4 @@
-import { readMatches } from "./readMatches";
+import { readLines } from "./readMatches";
 
 const calcTotalDistance = (list1: number[], list2: number[]): number => {
     // pass in two same length arrays of numbers 
@@ -43,8 +43,15 @@ const calcSimilarityScore = (list1: number[], list2: number[]): number => {
     console.log('calcSimilarityScore time', performance.now() - t0);
     return similarityScore;
 }
+const arr1:number[] = [];
+const arr2:number[] = [];
 
-const [arr1,arr2] = await readMatches("testinput.txt");
+function onLineRead(line:string) {    
+    const numberArr = line.split('   '); 
+    arr1.push(parseInt(numberArr[0], 10))
+    arr2.push(parseInt(numberArr[1], 10));
+}
+await readLines("testinput.txt", onLineRead );
 
 console.log('Total Distance: ', calcTotalDistance(arr1, arr2));
 console.log('Similarity Score: ', calcSimilarityScore(arr1, arr2));
